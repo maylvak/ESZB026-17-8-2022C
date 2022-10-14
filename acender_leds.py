@@ -1,8 +1,11 @@
+#!/usr/bin/python3
+
 from time import sleep
-path_amarelo = "/sys / class / gpio / gpio16 / "
-path_vermelho = "/sys / class / gpio / gpio20 / "
-path_verde = "/sys / class / gpio / gpio21 / " 
-SYSFS_DIR = "/ sys / class / gpio / "
+
+path_amarelo = "/sys/class/gpio/gpio16/"
+path_vermelho = "/sys/class/gpio/gpio20/"
+path_verde = "/sys/class/gpio/gpio21/" 
+SYSFS_DIR = "/sys/class/gpio/"
 num_amarelo = "16"
 num_vermelho = "20"
 num_verde = "21"
