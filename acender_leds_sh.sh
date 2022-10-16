@@ -22,28 +22,28 @@ desabilitar (GPIO_num) { # funcao para desabilitar a porta
 
 
 function main() {  # funcao principal, responsavel por habilitar e desabilitar as portas, assim como acender e apagar os leds na ordem definida
-	habilitar (GPIO_amarelo_num)
-	habilitar (GPIO_vermelho_num)
-	habilitar (GPIO_verde_num)
+	habilitar (GPIO_amarelo_num)  # habilita a porta do led amarelo
+	habilitar (GPIO_vermelho_num)  # habilita a porta do led vermelho
+	habilitar (GPIO_verde_num)  # habilita a porta do led verde
 	c = 0   # define uma variavel que servira como um contador   
 	while [$c -lt 5]  # cria um looping, que para apos 5 repeticoes
 	do
-		definir_led(1, GPIO_vermelho_num)
+		definir_led(1, GPIO_vermelho_num)  # acende o led vermelho por 2 seg
 		sleep 2
-		definir_led(0, GPIO_vermelho_num)
+		definir_led(0, GPIO_vermelho_num)  # desliga o led vermelho
 		sleep 0.1
-		definir_led(1, GPIO_verde_num)
+		definir_led(1, GPIO_verde_num)  # acende o led verde por 1 seg
 		sleep 1
-		definir_led(0, GPIO_verde_num)
+		definir_led(0, GPIO_verde_num)  # desliga o led verde
 		sleep 0.1
-		definir_led(1, GPIO_amarelo_num)
+		definir_led(1, GPIO_amarelo_num)  # acende o led amarelo por 1 seg
 		sleep 1
-		definir_led(0, GPIO_amarelo_num)
+		definir_led(0, GPIO_amarelo_num)  # desliga o led amarelo
 		sleep 0.1
 		c=c+1
 	done
-	desabilitar (GPIO_amarelo_num)
-	desabilitar (GPIO_vermelho_num)
-	desabilitar (GPIO_verde_num)
+	desabilitar (GPIO_amarelo_num)  # desabilita a porta do led amarelo
+	desabilitar (GPIO_vermelho_num)  # desabilita a porta do led vermelho
+	desabilitar (GPIO_verde_num)  # desabilita a porta do led verde
 }
 main()  # chama e executa a funcao principal
