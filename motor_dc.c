@@ -13,7 +13,7 @@ int main() {
    // f = 19200000 / (divisor * range) => divisor = 73
    pwmSetMode(PWM_MODE_MS);             // usando frequencia fixa
    for (duty = 4096; duty > 0; duty--){
-        divisor = 19200000 / (f * duty);
+        divisor = 19200000 / (500 * duty);
         pwmSetRange(duty);                    
         pwmSetClock(divisor);  
         printf("Testando motor. ");
