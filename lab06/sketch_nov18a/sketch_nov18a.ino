@@ -3,6 +3,8 @@
 // Wiley 2016, ISBN 978-1-119-1868-1, http://www.exploringrpi.com/
 
 #include <Wire.h>                  // Inclui bibliotecas da I2C, ou Two-Wire Interface (TWI)
+#include <studio.h>
+#include <math.h>
 const byte enderecoEscravo = 0x40; // guarda o endereco escravo do Arduino
 const int PinoPotenciometro = A0;  // pino analogico ligado ao potenciometro
 const int pinoLED = LED_BUILTIN;   // pino do LED do alarme (LED na placa do Arduino)
@@ -26,12 +28,14 @@ void enviaDadosPelaSerial(){              // opcional, para debug
   Serial.print("Valor lido: "); Serial.print(valorPot);
   Serial.print("; limite do alarme: "); Serial.print(limiteAlarme);
   Serial.print("; buffer = 0x");
+  Serial.print("e volts = ");
   Serial.print(buffer[0],HEX); Serial.print(" "); // byte menos significativo do valor lido
   Serial.print(buffer[1],HEX); Serial.print(" "); // byte mais significativo do valor lido
   Serial.print(buffer[2],HEX); Serial.print(" "); // byte menos significativo do alarme
   Serial.print(buffer[3],HEX); Serial.print(" "); // byte mais significativo do alarme
   Serial.println(buffer[4],HEX);Serial.print(" ");                  // valor ajustado no LED
   Serial.print(buffer[5],HEX); Serial.print(" ");
+  Serial.print(buffer[6],HEX); Serial.print(" ");
   
 }
 
@@ -47,7 +51,14 @@ void loop(){                       // Le o valor no potenciometro a cada 1 segun
      digitalWrite(pinoLED, LOW);   // desliga o LED do alarme
      buffer[4] = 0x00;
   }
-  buffer[5] = tensao(valorPot);
+ 
+  n = tensao(valorPot);
+  inteira = floor(n);
+  decimal = n - inteira;
+  if (0 <= inteira <= 5 && 00 <= decimal <= 99){
+     buffer[5] = char inteira;
+     buffer[6] = char decimal;
+  }
   enviaDadosPelaSerial();          // opcional, para debug
   delay(1000);
 }                     
